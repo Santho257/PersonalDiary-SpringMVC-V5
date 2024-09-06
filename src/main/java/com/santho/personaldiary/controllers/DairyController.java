@@ -2,7 +2,6 @@ package com.santho.personaldiary.controllers;
 
 import com.santho.personaldiary.dto.Page;
 import com.santho.personaldiary.propeditors.DatePropertyEditor;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

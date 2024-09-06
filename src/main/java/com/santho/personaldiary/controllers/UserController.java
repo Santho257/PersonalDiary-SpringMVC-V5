@@ -4,6 +4,7 @@ import com.santho.personaldiary.dao.UserDAO;
 import com.santho.personaldiary.dto.ChangePasswordDTO;
 import com.santho.personaldiary.dto.UserDeleteDTO;
 import com.santho.personaldiary.dto.UserSignUpDTO;
+import com.santho.personaldiary.exceptions.UserAlreadyExistsException;
 import com.santho.personaldiary.propeditors.SmallCasePropertyEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,8 +37,13 @@ public class UserController {
             model.addAttribute("passMisMatch","Password Doesn't Match");
             return "registerUser";
         }
-        System.out.println("Im working: Inside Registration Process");
-        userDAO.saveUser(userSignUpDTO);
+        try {
+            userDAO.saveUser(userSignUpDTO);
+        }catch (UserAlreadyExistsException ex){
+            System.out.println("Inside User Already Exists");
+            model.addAttribute("userExists",ex.getMessage());
+            return "registerUser";
+        }
         return "redirect:../diary/";
     }
 

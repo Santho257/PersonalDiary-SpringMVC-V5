@@ -19,9 +19,8 @@ public class CustomUserDetailService implements UserDetailsService {
     UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<CustomUser> users = userRepository.findById(email);
-        users.orElseThrow(() -> new UsernameNotFoundException("User Does Not Exists"));
-        CustomUser user = users.get();
+        CustomUser user = userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User Does Not Exists"));
         return User.withUsername(user.getEmail()).password(user.getPassword()).authorities("User").build();
     }
 }

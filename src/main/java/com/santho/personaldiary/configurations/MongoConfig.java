@@ -15,6 +15,5 @@ public class MongoConfig {
     MongoTemplate mongoTemplate(){
         return new MongoTemplate(MongoClients.create("mongodb://localhost:27017"),"personal_diary");
     }
-
 }
 

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2 align="center">Enter Your Details Here</h2>
-    <form:form modelAttribute="user">
+    <form:form modelAttribute="user" method="post" action="login">
         <table align="center">
             <tr>
                 <td align="right"><form:label path="email">Email : </form:label></td>

@@ -26,10 +26,6 @@ public class FrontConfig implements WebMvcConfigurer {
         registrar.setUseIsoFormat(true); // This will format dates in ISO format yyyy-MM-dd
         registrar.registerFormatters(registry);
     }
-    @Bean(name = "passwordEncoder")
-    public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 
     /*@Bean(name = "dataSource")
     public DataSource dataSource(){
