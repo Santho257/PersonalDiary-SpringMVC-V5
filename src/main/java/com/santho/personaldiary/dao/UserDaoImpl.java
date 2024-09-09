@@ -85,7 +85,7 @@ public class UserDaoImpl implements UserDAO {
         String origPassword = userr.getPassword();
         String enteredPassword = arrToString(changePasswordDTO.getOldPassword());
         if(!passwordEncoder.matches(enteredPassword,origPassword)){
-            throw new UnsupportedOperationException("The Old Password You Entered is Wrong...");
+            return false;
         }
         String newPassword = arrToString(changePasswordDTO.getPassword());
         userr.setPassword(passwordEncoder.encode(newPassword));
@@ -95,7 +95,8 @@ public class UserDaoImpl implements UserDAO {
 
     @Override
     public void deleteUser(Principal principal) {
-        userRepository.deleteById(principal.getName());
+        userRepository.deleteByEmailIgnoreCase(principal.getName());
+        SecurityContextHolder.clearContext();
     }
 
 

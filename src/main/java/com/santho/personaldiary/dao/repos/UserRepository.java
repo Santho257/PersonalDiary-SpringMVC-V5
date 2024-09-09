@@ -11,4 +11,6 @@ public interface UserRepository extends MongoRepository<CustomUser, String> {
     Optional<CustomUser> findByEmailIgnoreCase(String email);
 
     boolean existsByEmailIgnoreCase(String email);
+
+    void deleteByEmailIgnoreCase(String name);
 }

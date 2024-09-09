@@ -31,6 +31,21 @@ public class UserController {
         return "registerUser";
     }
 
+    @RequestMapping("/login")
+    public String loginUser(@ModelAttribute("user") UserSignUpDTO userSignUpDTO){
+        return "login";
+    }
+
+    @RequestMapping("/deleteuser")
+    public String deleteUser(@ModelAttribute("deletor") UserDeleteDTO userDeleteDTO){
+        return "deleteuser";
+    }
+
+    @RequestMapping("/changepassword")
+    public String changePassword(@ModelAttribute("passwordable") ChangePasswordDTO changePasswordDTO){
+        return "changepassword";
+    }
+
     @RequestMapping(path = "/processRegister", method = RequestMethod.POST)
     public String registerProcess(@Valid @ModelAttribute("user") UserSignUpDTO userSignUpDTO, BindingResult res, Model model){
         if(res.hasErrors()){
@@ -47,16 +62,6 @@ public class UserController {
         return "redirect:../diary/";
     }
 
-    @RequestMapping("/login")
-    public String loginUser(@ModelAttribute("user") UserSignUpDTO userSignUpDTO){
-        return "login";
-    }
-
-    @RequestMapping("/changepassword")
-    public String changePassword(@ModelAttribute("passwordable") ChangePasswordDTO changePasswordDTO){
-        return "changepassword";
-    }
-
     @RequestMapping(path = "/processpassword", method = RequestMethod.POST)
     public String processPassword(@Valid @ModelAttribute("passwordable") ChangePasswordDTO changePasswordDTO, BindingResult res, Model model,Principal principal){
         if(res.hasErrors()){
@@ -70,11 +75,6 @@ public class UserController {
             return "changepassword";
         }
         return "redirect:../diary/?passwordChanged";
-    }
-
-    @RequestMapping("/deleteuser")
-    public String deleteUser(@ModelAttribute("deletor") UserDeleteDTO userDeleteDTO){
-        return "deleteuser";
     }
 
     @RequestMapping(path = "/deleteprocess", method = RequestMethod.POST)
